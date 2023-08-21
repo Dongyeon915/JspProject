@@ -1,0 +1,5 @@
+package com.naver.ehd9567.dto;
+
+public class Restaurant {
+
+}

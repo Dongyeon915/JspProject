@@ -1,0 +1,40 @@
+package com.naver.ehd9567;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.naver.ehd9567.dto.Chef;
+import com.naver.ehd9567.dto.Restaurant;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+public class Customer {
+
+	@Autowired
+	private Restaurant restaurant;
+	
+	@Autowired
+	private Chef chef;
+	
+	@Test
+	public void nullTest() {
+		assertNotNull(restaurant);	
+	}
+	
+	@Test
+	public void chefBeanTest() {
+		assertNotNull("Chef Class는 Null이 아니야!", chef);
+	}
+	
+	@Test
+	public void addTest() {
+		assertEquals(3 + 5, 8);
+	}
+}

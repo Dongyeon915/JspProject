@@ -1,0 +1,10 @@
+package com.naver.ehd9567.dto;
+
+import lombok.Data;
+
+@Data
+public class Restaurant {
+	private String name;
+	private String number;
+	
+}

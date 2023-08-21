@@ -1,0 +1,21 @@
+package com.naver.ehd9567;
+
+import static org.junit.Assert.assertNull;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.naver.ehd9567.dto.Restaurant;
+
+@RunWith(SpringJUnit4ClassRunner)
+public class Customer {
+
+	@Autowired
+	private Restaurant restaurant;
+	
+	@Test
+	public void nullTest() {
+		assertNull(restaurant);	
+	}
+}

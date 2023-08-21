@@ -1,0 +1,20 @@
+package com.naver.ehd9567;
+
+import org.junit.Test;
+
+public class OraclConnectionTest {
+	
+	static {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void connectionTest() {
+		// JDBC - DB를 펀하게 관리하자!!!!
+		// MYSLQ, ORACLE, MariaDB 상관없다!!
+	}
+}

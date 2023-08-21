@@ -1,0 +1,23 @@
+package com.naver.ehd9567;
+
+import static org.junit.Assert.assertNull;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.naver.ehd9567.dto.Restaurant;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/test-context.xml")
+public class Customer {
+
+	private Restaurant restaurant;
+	
+	@Test
+	public void nullTest() {
+		assertNull(restaurant);	
+	}
+}

@@ -1,0 +1,17 @@
+package com.naver.ehd9567;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.naver.ehd9567.dto.Restaurant;
+
+public class Customer {
+
+	@Autowired
+	private Restaurant restaurant;
+	
+	@Test
+	public void say() {
+		assertNULL(restaurant);	
+	}
+}
