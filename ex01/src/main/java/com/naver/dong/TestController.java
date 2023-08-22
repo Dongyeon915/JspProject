@@ -15,8 +15,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.naver.dong.domain.SampleDTO;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
 @RequestMapping("/test")
+@Log4j
 public class TestController {
     
 //    @GetMapping("/ex01")
@@ -41,6 +44,11 @@ public class TestController {
 //	System.out.println(page);
 //	System.out.println(dto);
 //    }
+    
+    @GetMapping("/ex01")
+    public void ex01(SampleDTO sampleDTO) {
+	log.info(sampleDTO);
+    }
     
     @GetMapping("/ex06")
     public @ResponseBody SampleDTO ex06() {
