@@ -38,7 +38,10 @@
 					<c:forEach items="${list}" var="board">
 						<tr class="odd gradeX">
 							<td><c:out value="${board.bno}"/></td>
-							<td><c:out value="${board.title}"/></td>
+							<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
+							<c:out value="${board.title}"></c:out>
+							
+							</a></td>
 							<td><c:out value="${board.writer}"/></td>
 						</tr>
 					</c:forEach>
@@ -47,7 +50,29 @@
 
 				</table>
 				<!-- /.table-responsive -->
-	
+		
+		<div class="'pull-right">
+			<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+			<li class="page-item"><a class="page-link" href="${pageMaker.startPage - 1}">Previous</a></li>
+			</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="number">
+					 <li class="page-item ${pageMaker.criteria.pageNum == number? "active" : " "}"><a class="page-link" href="${number}">${number}</a></li>
+				
+				</c:forEach>
+				
+				<!-- if test는 true false를 반환한다 true일시 next -->
+				<c:if test="${pageMaker.next}">
+				<li class="page-item"><a class="page-link" href="${pageMaker.endPage +1}">Next</a></li>
+				</c:if>
+			</ul>
+		</div>
+		
+		<form id="actionForm" action="/board/list" method="get">
+			<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
+		</form>
+		
 			<!-- /.panel-body -->
 		</div>
 		<!-- /.panel -->
@@ -55,12 +80,6 @@
 	<!-- /.col-lg-12 -->
 </div>
 
-
-<script>
-	$(document).ready(function() {
-		var result = '<c:out value="${result}"/>';	
-	});
-</script>
 
 <div id="myModal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -86,29 +105,46 @@
 
 
 
-<script>
-	$(document).ready(function() {
-		var result = '<c:out value="${result}"/>';
-		
-		checkModal(result);
-		
-		function checkModal(result) {
-			if (result === '') {
-				return;
-			}
-			if (parsInt(result) > 0) {
-				$(".modal-body").html(
-					"게시글이 등록되었습니다"		
-				);
-			}
-			$("#myModal").modal("show");
-		}
-	})	
+<script type="text/javascript">
+$(document).ready(function(){
+
+	var result = '<c:out value="${result}"/>';    
+	checkModal(result);
 	
-	// 등록 버튼 누를시 register로 이동
+	// 반복적인 문서 
+	history.replaceState({},null,null);
+	
+	function checkModal(result) {
+	if(result === '' || history.state) {
+	return;
+	}
+	if(result === 'success') {
+		$(".modal-body").html("정상 처리 되었습니다.");
+		}else if(parseInt(result) > 0) {
+			$(".modal-body").html("게시글 "+ parsInt(result) + " 번이 등록되었습니다.");
+		}
+	$("#myModal").modal("show")
+
+	}
+	//등록 버튼 누를시 register로 이동
 	$("#regBtn").click(function() {
 		self.location = "/board/register";
-	})
+	});
+	
+	
+	var actionForm = $("#actionForm");
+	//paginate_button 내의 a태그 paginate_button a
+	$(".page-link").on("click", function (e) {
+		e.preventDefault();
+		// page이동시 actionform의 page값을 바꿔주며 전달
+		 var targetPage = $(this).attr("href");
+		console.log(targetPage);
+		
+		actionForm.find("input[name='pageNum']").val(targetPage);
+		actionForm.submit():
+	});
+	
+	});
 	
 </script>
 
