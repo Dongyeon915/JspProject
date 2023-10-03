@@ -1,7 +1,0 @@
-package com.naver.ehd9567.dto;
-
-public class Restaurant {
-	private String name;
-	private String number;
-	
-}

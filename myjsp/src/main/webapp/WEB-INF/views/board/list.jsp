@@ -140,7 +140,7 @@ $(document).ready(function(){
 		 var targetPage = $(this).attr("href");
 		console.log(targetPage);
 		
-		actionForm.find("input[name='pageNum']").val(targetPage);
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit():
 	});
 	

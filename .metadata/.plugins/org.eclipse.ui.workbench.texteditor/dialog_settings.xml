@@ -6,22 +6,35 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="post"/>
 		<list key="findhistory">
-			<item value="juit"/>
-			<item value="juut"/>
-			<item value="junut"/>
-			<item value="test"/>
-			<item value="Test"/>
+			<item value="post"/>
+			<item value="/board"/>
+			<item value="example"/>
+			<item value="1 to"/>
+			<item value="showing"/>
+			<item value="dataTables"/>
+			<item value="panel-heading"/>
+			<item value="Board"/>
+			<item value="en"/>
+			<item value="../"/>
+			<item value="file"/>
+			<item value="jack"/>
+			<item value="jackson"/>
+			<item value="servlet"/>
+			<item value="log4jdbc-log4j2"/>
 		</list>
 		<list key="replacehistory">
+			<item value="/resources/"/>
+			<item value="//"/>
+			<item value="/resources"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="799"/>
-		<item key="DIALOG_Y_ORIGIN" value="222"/>
+		<item key="DIALOG_X_ORIGIN" value="142"/>
+		<item key="DIALOG_Y_ORIGIN" value="385"/>
 		<item key="DIALOG_WIDTH" value="340"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
-		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
 	</section>
 </section>
