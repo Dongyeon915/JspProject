@@ -45,12 +45,15 @@
 			<button data-oper="list" class="btn btn-default">목록</button>
 
 			<form id="operForm" action="/board/modify" method="get">
-	<input type="hidden" id="bno" name="bno" value="<c:out value='${board.bno }'/>">
-	<input type="hidden" name="pageNum" value="<c:out value='${cri.pageNum}'/>" >
-	<input type="hidden" name="amount" value="<c:out value='${cri.amount}'/>" >
-	<input type="hidden" name="type" value="<c:out value='${cri.type}'/>" >
-	<input type="hidden" name="keyword" value="<c:out value='${cri.keyword}'/>" >
-</form>
+				<input type="hidden" id="bno" name="bno"
+					value="<c:out value='${board.bno }'/>"> <input
+					type="hidden" name="pageNum"
+					value="<c:out value='${cri.pageNum}'/>"> <input
+					type="hidden" name="amount" value="<c:out value='${cri.amount}'/>">
+				<input type="hidden" name="type"
+					value="<c:out value='${cri.type}'/>"> <input type="hidden"
+					name="keyword" value="<c:out value='${cri.keyword}'/>">
+			</form>
 
 
 		</div>
@@ -61,6 +64,34 @@
 </div>
 <!-- /.col-lg-12 -->
 </div>
+
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+
+<script>
+
+console.log("=================");
+console.log("JS TEST");
+
+var bnoValue = '<c:out value="${board.bno}"/>';
+
+// for replyService add test
+replyService.getList({bno:bnoValue, page:1}, function(list){
+	
+	for(var i = 0, len = list.length||0; i<len; i++){
+		console.log(list[i]);
+	}
+});
+</script>
+
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		console.log(replyService);
+	});
+</script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

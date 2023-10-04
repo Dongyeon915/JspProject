@@ -1,91 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="org.zerock.mapper.BoardMapper">
-  
-  <!-- id 메소드는 mapper 인터페이스와 동일한 이름으로 작성해주는게 좋다 
-  		mybatis는 내부적으로 JDBC의 preparedStatement를 활용한다 -->
-  	<select id="getList" resultType="org.zerock.domain.BoardVO">
+<mapper namespace="org.zerock.mapper.BoardMapper">
+
+	<!-- id 메소드는 mapper 인터페이스와 동일한 이름으로 작성해주는게 좋다 mybatis는 내부적으로 JDBC의 preparedStatement를 
+		활용한다 -->
+	<select id="getList" resultType="org.zerock.domain.BoardVO">
   		<![CDATA[
   			select * from tbl_board where bno > 0
   		]]>
-  	</select>
-  	
-  	<insert id="insert">
-  		insert into tbl_board (bno,title,content,writer) values (seq_board.nextval,#{title},#{content},#{writer})
-  	</insert>
-  	
-  	<insert id="insertSelectKey">
-  	<!-- 해당 조회한 bno 값을 먼저 실행한후 그값을 통해 insert문을 실행한다. -->
-  		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
-  			select seq_board.nextval from dual
-  		</selectKey>  		
-  		insert into tbl_board (bno,title,content,writer) values (#{bno},#{title},#{content},#{writer})
-  	</insert>
-  	
-  	<!-- mapper return 타입에 맞게 해당 결과를 처리한다 get,set을 통해서 동작함-->
-  	<select id="read" resultType="org.zerock.domain.BoardVO">
-  		select * from tbl_board where bno = #{bno}
-  	</select>
-  	
-  	<delete id="delete">
-  		delete from tbl_board where bno = #{bno}
-  	</delete>
-  	
-  	<!-- 수정되는 시간만을 sysdate로 생성 시간은 건들지 않는다. -->
-  	<update id="update">
-  		update tbl_board set
-  		 title = #{title},
-  		 content = #{content},
-  		 writer = #{writer},
-  		 updateDate = sysdate
-  		 where bno = #{bno}
-  	</update>
-  	
-  	<sql id="criteria">
-	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-        <choose>
-            <when test="type == 'T'.toString()">
-            	title like '%'||#{keyword}||'%'
-            </when>
-            <when test="type == 'C'.toString()">
-            	content like '%'||#{keyword}||'%'
-            </when>
-            <when test="type == 'W'.toString()">
-            	writer like '%'||#{keyword}||'%'
-            </when>
-        </choose>
-	</trim>
-</sql>
-  	
-  	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	</select>
+
+	<insert id="insert">
+		insert into tbl_board (bno,title,content,writer) values
+		(seq_board.nextval,#{title},#{content},#{writer})
+	</insert>
+
+	<insert id="insertSelectKey">
+		<!-- 해당 조회한 bno 값을 먼저 실행한후 그값을 통해 insert문을 실행한다. -->
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into tbl_board (bno,title,content,writer) values
+		(#{bno},#{title},#{content},#{writer})
+	</insert>
+
+	<!-- mapper return 타입에 맞게 해당 결과를 처리한다 get,set을 통해서 동작함 -->
+	<select id="read" resultType="org.zerock.domain.BoardVO">
+		select * from tbl_board where bno = #{bno}
+	</select>
+
+	<delete id="delete">
+		delete from tbl_board where bno = #{bno}
+	</delete>
+
+	<!-- 수정되는 시간만을 sysdate로 생성 시간은 건들지 않는다. -->
+	<update id="update">
+		update tbl_board set
+		title = #{title},
+		content = #{content},
+		writer = #{writer},
+		updateDate = sysdate
+		where bno = #{bno}
+	</update>
+
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<choose>
+				<when test="type == 'T'.toString()">
+					title like '%'||#{keyword}||'%'
+				</when>
+				<when test="type == 'C'.toString()">
+					content like '%'||#{keyword}||'%'
+				</when>
+				<when test="type == 'W'.toString()">
+					writer like '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
 	 <![CDATA[
-        select *
-        from (
-            select /*+ INDEX_DESC(tbl_board tbl_board_pk) */
-            rownum rn, bno, title, content, writer, regdate, updatedate
-            from tbl_board
-            where 
+        select bno, title, content, writer,regdate,updatedate
+        from (select /*+ INDEX_DESC(tbl_board pk_board) */ rownum rn, bno, title, content, writer, regdate, updatedate from tbl_board where 
     ]]>
-    <include refid="criteria"></include>
-  
+		<include refid="criteria"></include>
     <![CDATA[
-            rownum <= #{pageNum} * #{amount}
-        )
-        where rn > (#{pageNum} - 1) * #{amount}
+         rownum <= #{pageNum} * #{amount}) where rn > (#{pageNum} -1) * #{amount}
     ]]>
-</select>
+	</select>
 
 
+	<select id="getTotalCount" resultType="int">
+		select count(*) from tbl_board
+		where
+		<include refid="criteria"></include>
+		bno > 0
+	</select>
 
 
-<select id="getTotalCount" resultType="int">
-        select count(*) from tbl_board
-        where
-        <include refid="criteria"></include>
-        
-        bno > 0
-    </select>
-
-  
-  </mapper>
+</mapper>
