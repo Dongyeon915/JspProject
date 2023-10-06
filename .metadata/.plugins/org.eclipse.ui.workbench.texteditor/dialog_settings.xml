@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="regBtn"/>
+		<item key="selection" value="Servlet"/>
 		<list key="findhistory">
+			<item value="servlet"/>
+			<item value="son"/>
 			<item value="regBtn"/>
 			<item value="post"/>
 			<item value="/board"/>
@@ -21,8 +23,6 @@
 			<item value="../"/>
 			<item value="file"/>
 			<item value="jack"/>
-			<item value="jackson"/>
-			<item value="servlet"/>
 		</list>
 		<list key="replacehistory">
 			<item value="/resources/"/>
